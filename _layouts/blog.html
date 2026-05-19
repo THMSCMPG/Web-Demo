@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<article class="page-article">
+  <div class="container">
+    <header class="page-header reveal">
+      <h1 class="page-title">{{ page.title | default: "Blog" }}</h1>
+      {% if page.description %}<p class="page-desc">{{ page.description }}</p>{% endif %}
+    </header>
+
+    {% if site.posts.size > 0 %}
+    <div class="post-list">
+      {% for post in site.posts %}
+      <a class="post-row reveal" href="{{ post.url | relative_url }}">
+        <div class="post-row-left">
+          <time class="post-date">{{ post.date | date: "%b %d, %Y" }}</time>
+          {% if post.tags %}<span class="tag">{{ post.tags | first }}</span>{% endif %}
+        </div>
+        <div class="post-row-title">{{ post.title }}</div>
+        {% if post.description %}<div class="post-row-desc">{{ post.description }}</div>{% endif %}
+        <span class="post-row-arr" aria-hidden="true">&rarr;</span>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="muted">No posts yet — check back soon.</p>
+    {% endif %}
+  </div>
+</article>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  {% include head.html %}
+</head>
+<body>
+  {% include nav.html %}
+
+  <main id="main-content">
+    {{ content }}
+  </main>
+
+  {% include footer.html %}
+
+  <a href="#" class="back-to-top" id="back-to-top" aria-label="Back to top" title="Back to top">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
+  </a>
+
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>

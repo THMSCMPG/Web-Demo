@@ -1,0 +1,81 @@
+---
+layout: default
+---
+
+<!-- ── HERO ─────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    {% if page.eyebrow %}
+    <p class="hero-eyebrow reveal">{{ page.eyebrow }}</p>
+    {% endif %}
+    <h1 class="hero-title reveal">{{ page.hero_title | default: site.title }}</h1>
+    <p class="hero-sub reveal">{{ page.hero_sub | default: site.tagline }}</p>
+    {% if page.cta_text %}
+    <div class="hero-cta reveal">
+      <a class="btn btn-primary" href="{{ page.cta_url | default: '/work/' | relative_url }}">{{ page.cta_text }}</a>
+      {% if page.cta2_text %}
+      <a class="btn btn-outline" href="{{ page.cta2_url | default: '/about/' | relative_url }}">{{ page.cta2_text }}</a>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- ── OPTIONAL BODY CONTENT ─────────────────────────── -->
+{% if content != "" %}
+<section class="home-body">
+  <div class="container prose">{{ content }}</div>
+</section>
+{% endif %}
+
+<!-- ── RECENT PROJECTS ───────────────────────────────── -->
+{% assign recent_projects = site.projects | sort: "date" | reverse | slice: 0, 3 %}
+{% if recent_projects.size > 0 %}
+<section class="home-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="section-title">Recent Work</h2>
+      <a class="section-more" href="{{ '/work/' | relative_url }}">All projects &rarr;</a>
+    </div>
+    <div class="card-grid">
+      {% for project in recent_projects %}
+      <a class="project-card reveal" href="{{ project.url | relative_url }}">
+        <div class="card-img{% unless project.cover %} card-img-empty{% endunless %}"
+          {% if project.cover %}style="background-image:url('{{ project.cover | relative_url }}')"{% endif %}>
+          {% unless project.cover %}<span>No image yet</span>{% endunless %}
+        </div>
+        <div class="card-body">
+          {% if project.tags %}<span class="tag">{{ project.tags | first }}</span>{% endif %}
+          <h3 class="card-title">{{ project.title }}</h3>
+          <p class="card-desc">{{ project.description }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ── RECENT POSTS ──────────────────────────────────── -->
+{% if site.posts.size > 0 %}
+<section class="home-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2 class="section-title">From the Blog</h2>
+      <a class="section-more" href="{{ '/blog/' | relative_url }}">All posts &rarr;</a>
+    </div>
+    <div class="post-list">
+      {% for post in site.posts limit: 3 %}
+      <a class="post-row reveal" href="{{ post.url | relative_url }}">
+        <div class="post-row-left">
+          <time class="post-date">{{ post.date | date: "%b %d, %Y" }}</time>
+          {% if post.tags %}<span class="tag">{{ post.tags | first }}</span>{% endif %}
+        </div>
+        <div class="post-row-title">{{ post.title }}</div>
+        <span class="post-row-arr" aria-hidden="true">&rarr;</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

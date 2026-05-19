@@ -1,0 +1,35 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#f8f6f1" />
+
+<title>{% if page.title and page.layout != "home" %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }} — {{ site.tagline }}{% endif %}</title>
+<meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}" />
+
+<!-- Open Graph -->
+<meta property="og:type"        content="{% if page.layout == 'post' %}article{% else %}website{% endif %}" />
+<meta property="og:title"       content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
+<meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}" />
+<meta property="og:url"         content="{{ site.url }}{{ page.url }}" />
+{% if page.cover %}<meta property="og:image" content="{{ site.url }}{{ page.cover }}" />{% endif %}
+
+<!-- Canonical -->
+<link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- Styles -->
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+
+<!-- Accent colour from _config.yml -->
+<style>:root { --accent: {{ site.accent_color | default: "#2d6a4f" }}; }</style>
+
+<!-- Prevent theme flash -->
+<script>
+  (function(){
+    var t = localStorage.getItem('theme') || '{{ site.default_theme | default: "light" }}';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>

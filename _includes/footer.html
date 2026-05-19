@@ -1,0 +1,29 @@
+<footer class="site-footer">
+  <div class="container footer-inner">
+
+    <div class="footer-brand">
+      <span class="footer-name">{{ site.title }}</span>
+      {% if site.tagline %}<span class="footer-tagline">{{ site.tagline }}</span>{% endif %}
+    </div>
+
+    <div class="footer-links">
+      {% if site.author.twitter and site.author.twitter != "" %}
+      <a href="https://twitter.com/{{ site.author.twitter }}" target="_blank" rel="noopener">Twitter</a>
+      {% endif %}
+      {% if site.author.linkedin and site.author.linkedin != "" %}
+      <a href="https://linkedin.com/in/{{ site.author.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>
+      {% endif %}
+      {% if site.author.instagram and site.author.instagram != "" %}
+      <a href="https://instagram.com/{{ site.author.instagram }}" target="_blank" rel="noopener">Instagram</a>
+      {% endif %}
+      {% if site.author.email and site.author.email != "" %}
+      <a href="mailto:{{ site.author.email }}">Email</a>
+      {% endif %}
+    </div>
+
+    <div class="footer-copy">
+      &copy; {% assign y = site.time | date: "%Y" %}{{ y }} {{ site.author.name | default: site.title }}
+    </div>
+
+  </div>
+</footer>

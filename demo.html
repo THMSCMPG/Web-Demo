@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Feature Catalog — Web Design by [Your Name]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  /* ─── TOKENS ─────────────────────────────────── */
+  :root {
+    --bg:      #0c0c0a;
+    --bg2:     #141411;
+    --bg3:     #1c1c18;
+    --border:  #2a2a24;
+    --border2: #3a3a32;
+    --text:    #f0ede4;
+    --muted:   #7a7a6e;
+    --subtle:  #4a4a42;
+    --accent:  #d4a853;
+    --accent2: #a87e30;
+    --green:   #5db87a;
+    --blue:    #5b9cf6;
+    --pink:    #e07b9b;
+    --radius:  10px;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  /* ─── RESET ──────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.65;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── LAYOUT ─────────────────────────────────── */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* ─── HEADER ─────────────────────────────────── */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    background: rgba(12,12,10,0.92);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .logo {
+    font-family: var(--font-display);
+    font-size: 26px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    text-decoration: none;
+    line-height: 1;
+  }
+  .logo span { color: var(--accent); }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .site-link {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid var(--border2);
+    padding: 6px 14px;
+    border-radius: 100px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .site-link:hover { color: var(--text); border-color: var(--subtle); }
+  .site-link .arr { display: inline-block; transition: transform 0.2s; margin-left: 3px; }
+  .site-link:hover .arr { transform: translate(2px, -2px); }
+
+  /* ─── HERO ───────────────────────────────────── */
+  .hero {
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 9vw, 110px);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+  .hero-title .dim { color: var(--subtle); }
+  .hero-desc {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+  .hero-desc strong { color: var(--text); font-weight: 500; }
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .stat-item { display: flex; flex-direction: column; gap: 2px; }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 38px;
+    color: var(--text);
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 12px;
+    font-family: var(--font-mono);
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── CONTROLS ───────────────────────────────── */
+  .controls {
+    padding: 32px 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .search-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 220px;
+    max-width: 420px;
+  }
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 14px;
+    pointer-events: none;
+  }
+  .search-input {
+    width: 100%;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    padding: 10px 16px 10px 38px;
+    border-radius: var(--radius);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-input::placeholder { color: var(--subtle); }
+  .search-input:focus { border-color: var(--border2); }
+
+  .result-count {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .filter-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+  .filter-btn:hover { border-color: var(--border2); color: var(--text); }
+  .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #1a1000;
+    font-weight: 500;
+  }
+
+  .difficulty-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .difficulty-label {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-right: 4px;
+  }
+
+  /* ─── GRID ───────────────────────────────────── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 80px;
+  }
+  .feature-card {
+    background: var(--bg);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: background 0.15s;
+    cursor: default;
+    position: relative;
+  }
+  .feature-card:hover { background: var(--bg2); }
+  .feature-card.hidden { display: none; }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .cat-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .cat-nav    { background: rgba(91,156,246,0.12); color: #5b9cf6; }
+  .cat-layout { background: rgba(212,168,83,0.12); color: #d4a853; }
+  .cat-hero   { background: rgba(224,123,155,0.12); color: #e07b9b; }
+  .cat-cards  { background: rgba(93,184,122,0.12);  color: #5db87a; }
+  .cat-forms  { background: rgba(178,120,246,0.12); color: #b278f6; }
+  .cat-anim   { background: rgba(246,146,91,0.12);  color: #f6925b; }
+  .cat-ui     { background: rgba(91,214,246,0.12);  color: #5bd6f6; }
+  .cat-media  { background: rgba(246,91,91,0.12);   color: #f65b5b; }
+  .cat-type   { background: rgba(200,246,91,0.12);  color: #a8d44b; }
+  .cat-util   { background: rgba(168,126,48,0.12);  color: #c49a45; }
+
+  .diff-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .diff-beginner     { background: rgba(93,184,122,0.1);  color: #5db87a; }
+  .diff-intermediate { background: rgba(212,168,83,0.1);  color: #d4a853; }
+  .diff-advanced     { background: rgba(246,91,91,0.1);   color: #f65b5b; }
+
+  .feature-name {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    color: var(--text);
+    margin-top: 6px;
+  }
+  .feature-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 4px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .tech-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tech-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--subtle);
+    background: var(--bg3);
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  .view-link {
+    font-size: 12px;
+    color: var(--accent);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+    opacity: 0.8;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .view-link:hover { opacity: 1; }
+
+  /* ─── NO RESULTS ─────────────────────────────── */
+  .no-results {
+    display: none;
+    padding: 80px 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .no-results-icon { font-size: 40px; margin-bottom: 16px; color: var(--subtle); }
+
+  /* ─── FOOTER ─────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-text {
+    font-size: 13px;
+    color: var(--subtle);
+    font-family: var(--font-mono);
+  }
+  .footer-text a { color: var(--muted); text-decoration: none; }
+  .footer-text a:hover { color: var(--text); }
+
+  /* ─── BACK TO TOP ────────────────────────────── */
+  #btt {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    color: var(--muted);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, color 0.2s;
+    text-decoration: none;
+    z-index: 99;
+  }
+  #btt.visible { opacity: 1; pointer-events: all; }
+  #btt:hover { color: var(--text); }
+
+  /* ─── SCROLLBAR ──────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+  /* ─── RESPONSIVE ─────────────────────────────── */
+  @media (max-width: 600px) {
+    .hero-title { font-size: 52px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container header-inner">
+    <a class="logo" href="#">Feature<span>.</span>Catalog</a>
+    <div class="header-right">
+      <a class="site-link" href="https://your-site.com" target="_blank" rel="noopener">
+        See it live <span class="arr">↗</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <p class="hero-eyebrow">// Web Design Feature Catalog</p>
+    <h1 class="hero-title">WHAT<br/><span class="dim">I BUILD</span></h1>
+    <p class="hero-desc">
+      A <strong>complete menu</strong> of web design features and components I implement.
+      Browse, filter by category, then see any of them working live on my website.
+    </p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num" id="total-count">60</span>
+        <span class="stat-label">Features</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">10</span>
+        <span class="stat-label">Categories</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Skill levels</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTROLS -->
+<div class="container">
+  <div class="controls">
+    <div class="search-row">
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input class="search-input" type="search" id="search"
+          placeholder="Search features…" autocomplete="off" />
+      </div>
+      <span class="result-count" id="result-count"></span>
+    </div>
+    <div class="filter-row" id="cat-filters">
+      <button class="filter-btn active" data-cat="all">All</button>
+      <button class="filter-btn" data-cat="nav">Navigation</button>
+      <button class="filter-btn" data-cat="layout">Layout</button>
+      <button class="filter-btn" data-cat="hero">Hero / Landing</button>
+      <button class="filter-btn" data-cat="cards">Cards &amp; Content</button>
+      <button class="filter-btn" data-cat="forms">Forms &amp; Input</button>
+      <button class="filter-btn" data-cat="anim">Animation</button>
+      <button class="filter-btn" data-cat="ui">Interactive UI</button>
+      <button class="filter-btn" data-cat="media">Media</button>
+      <button class="filter-btn" data-cat="type">Typography</button>
+      <button class="filter-btn" data-cat="util">Utilities</button>
+    </div>
+    <div class="difficulty-row">
+      <span class="difficulty-label">Difficulty:</span>
+      <button class="filter-btn active" data-diff="all">All levels</button>
+      <button class="filter-btn diff-beginner" data-diff="beginner">Beginner</button>
+      <button class="filter-btn diff-intermediate" data-diff="intermediate">Intermediate</button>
+      <button class="filter-btn diff-advanced" data-diff="advanced">Advanced</button>
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <div class="features-grid" id="grid"></div>
+  <div class="no-results" id="no-results">
+    <div class="no-results-icon">◌</div>
+    <p>No features found. Try a different search or filter.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="container">
+  <span class="footer-text">
+    Built with HTML · CSS · JS — deployable on <a href="https://pages.github.com" target="_blank">GitHub Pages</a>
+  </span>
+  <span class="footer-text">
+    <a href="https://your-site.com" target="_blank">your-site.com ↗</a>
+  </span>
+</footer>
+
+<!-- BACK TO TOP -->
+<a id="btt" href="#" title="Back to top" aria-label="Back to top">↑</a>
+
+<script>
+// ─── DATA ─────────────────────────────────────────────────────────
+const features = [
+  // NAVIGATION
+  { cat:"nav",    name:"Sticky Navbar",         diff:"beginner",     desc:"Navigation bar that locks to the top as you scroll down the page.",                    tech:["CSS","JS"],     live:"" },
+  { cat:"nav",    name:"Hamburger Menu",         diff:"beginner",     desc:"Full-screen or slide-in mobile menu triggered by a three-line icon.",                  tech:["CSS","JS"],     live:"" },
+  { cat:"nav",    name:"Mega Menu",              diff:"intermediate", desc:"Multi-column dropdown revealing links, images, and calls to action on hover.",         tech:["CSS","JS"],     live:"" },
+  { cat:"nav",    name:"Sidebar Nav",            diff:"intermediate", desc:"Fixed side-drawer navigation for dashboards, docs, and complex apps.",                 tech:["CSS","JS"],     live:"" },
+  { cat:"nav",    name:"Breadcrumbs",            diff:"beginner",     desc:"Hierarchical trail showing the user's current location within the site structure.",    tech:["HTML","CSS"],   live:"" },
+  { cat:"nav",    name:"Reading Progress Bar",   diff:"beginner",     desc:"Thin bar at the top of the viewport filling as the user scrolls through an article.", tech:["JS","CSS"],     live:"" },
+
+  // LAYOUT
+  { cat:"layout", name:"CSS Grid Gallery",       diff:"beginner",     desc:"Responsive photo or card grid using modern CSS Grid with gap control.",               tech:["CSS"],          live:"" },
+  { cat:"layout", name:"Masonry Layout",         diff:"intermediate", desc:"Pinterest-style grid where items fill columns at their natural height.",              tech:["JS","CSS"],     live:"" },
+  { cat:"layout", name:"Bento Grid",             diff:"intermediate", desc:"Apple-inspired asymmetric grid with mixed-size feature tiles.",                       tech:["CSS"],          live:"" },
+  { cat:"layout", name:"Split-Screen Layout",    diff:"beginner",     desc:"50/50 or variable-split two-column page layout with separate scroll zones.",          tech:["CSS"],          live:"" },
+  { cat:"layout", name:"Sticky Sidebar",         diff:"intermediate", desc:"A column that sticks in view while the main content scrolls past it.",                tech:["CSS","JS"],     live:"" },
+  { cat:"layout", name:"Infinite Scroll",        diff:"advanced",     desc:"Content loads automatically as the user approaches the bottom of the page.",          tech:["JS"],           live:"" },
+
+  // HERO / LANDING
+  { cat:"hero",   name:"Full-Screen Hero",       diff:"beginner",     desc:"100vh opening section with centered headline, subtext, and clear call to action.",    tech:["HTML","CSS"],   live:"" },
+  { cat:"hero",   name:"Video Background Hero",  diff:"intermediate", desc:"Looping muted video fills the viewport behind hero text and buttons.",                 tech:["HTML","CSS"],   live:"" },
+  { cat:"hero",   name:"Parallax Hero",          diff:"intermediate", desc:"Background image moves at a slower rate than the page, creating depth on scroll.",    tech:["CSS","JS"],     live:"" },
+  { cat:"hero",   name:"Typewriter Effect",      diff:"beginner",     desc:"Headline that types and deletes itself through a list of phrases in a loop.",          tech:["JS"],           live:"" },
+  { cat:"hero",   name:"Particle Background",    diff:"advanced",     desc:"Animated floating dots or shapes on a canvas backdrop behind hero content.",          tech:["JS","Canvas"],  live:"" },
+  { cat:"hero",   name:"Scroll-Animated Hero",   diff:"intermediate", desc:"Hero elements animate into view based on scroll position using Intersection Observer.",tech:["JS","CSS"],     live:"" },
+
+  // CARDS & CONTENT
+  { cat:"cards",  name:"Hover Flip Card",        diff:"beginner",     desc:"Card rotates 180° on hover to reveal a back face with additional information.",       tech:["CSS"],          live:"" },
+  { cat:"cards",  name:"Glassmorphism Card",     diff:"beginner",     desc:"Frosted-glass look using backdrop-filter blur, semi-transparency, and subtle borders.",tech:["CSS"],          live:"" },
+  { cat:"cards",  name:"Timeline",               diff:"intermediate", desc:"Vertical or horizontal chronological list of events with icons and dates.",            tech:["HTML","CSS"],   live:"" },
+  { cat:"cards",  name:"Accordion / FAQ",        diff:"beginner",     desc:"Collapsible sections that expand on click, revealing hidden content smoothly.",       tech:["JS","CSS"],     live:"" },
+  { cat:"cards",  name:"Tabs",                   diff:"beginner",     desc:"Switch between content panels using a row of tabbed navigation buttons.",             tech:["JS","CSS"],     live:"" },
+  { cat:"cards",  name:"Pricing Table",          diff:"intermediate", desc:"Side-by-side plan comparison with feature lists, prices, and highlighted CTAs.",      tech:["HTML","CSS"],   live:"" },
+  { cat:"cards",  name:"Testimonial Slider",     diff:"intermediate", desc:"Rotating quotes carousel with author avatars and star ratings.",                      tech:["JS","CSS"],     live:"" },
+  { cat:"cards",  name:"Stats Counter",          diff:"beginner",     desc:"Numbers animate upward from zero when they scroll into the viewport.",                tech:["JS"],           live:"" },
+
+  // FORMS & INPUT
+  { cat:"forms",  name:"Floating Label Form",    diff:"beginner",     desc:"Labels float above the field as the user types, saving vertical space.",              tech:["CSS","JS"],     live:"" },
+  { cat:"forms",  name:"Multi-Step Form",        diff:"intermediate", desc:"Long form split into sequential steps with progress indicator.",                      tech:["JS","CSS"],     live:"" },
+  { cat:"forms",  name:"Form Validation",        diff:"intermediate", desc:"Real-time client-side validation with accessible error states and success feedback.", tech:["JS"],           live:"" },
+  { cat:"forms",  name:"Drag & Drop Upload",     diff:"advanced",     desc:"File upload zone that accepts drops from the desktop with preview thumbnails.",       tech:["JS"],           live:"" },
+  { cat:"forms",  name:"Search Autocomplete",    diff:"intermediate", desc:"Input that shows a live suggestion dropdown as the user types.",                      tech:["JS"],           live:"" },
+  { cat:"forms",  name:"Range Slider UI",        diff:"beginner",     desc:"Custom-styled range input with live value readout and dual-handle option.",           tech:["CSS","JS"],     live:"" },
+
+  // ANIMATION
+  { cat:"anim",   name:"Scroll Reveal",          diff:"beginner",     desc:"Elements fade or slide into view as they enter the viewport using IntersectionObserver.",tech:["JS","CSS"],   live:"" },
+  { cat:"anim",   name:"CSS Keyframe Animations",diff:"beginner",     desc:"Pure CSS animations for loaders, pulsing elements, and entrance effects.",           tech:["CSS"],          live:"" },
+  { cat:"anim",   name:"GSAP Animations",        diff:"advanced",     desc:"Complex sequenced animations using the GreenSock Animation Platform library.",       tech:["JS","GSAP"],    live:"" },
+  { cat:"anim",   name:"Lottie Animations",      diff:"intermediate", desc:"Vector animations exported from After Effects, rendered lightweight in the browser.", tech:["JS","Lottie"],  live:"" },
+  { cat:"anim",   name:"Page Transitions",       diff:"advanced",     desc:"Smooth animated transitions between pages using CSS or View Transitions API.",       tech:["JS","CSS"],     live:"" },
+  { cat:"anim",   name:"Skeleton Loading",       diff:"intermediate", desc:"Placeholder shimmer blocks shown while content is fetching from an API.",            tech:["CSS"],          live:"" },
+  { cat:"anim",   name:"Micro-Interactions",     diff:"intermediate", desc:"Subtle button presses, icon morphs, and hover effects that reward interaction.",      tech:["CSS","JS"],     live:"" },
+
+  // INTERACTIVE UI
+  { cat:"ui",     name:"Dark / Light Mode Toggle",diff:"intermediate",desc:"Theme switcher that persists the user's preference via localStorage.",               tech:["JS","CSS"],     live:"" },
+  { cat:"ui",     name:"Modal Dialog",            diff:"beginner",    desc:"Overlay panel with backdrop blur and focus-trap for forms, alerts, and galleries.",   tech:["JS","CSS"],     live:"" },
+  { cat:"ui",     name:"Toast Notifications",     diff:"intermediate",desc:"Non-blocking status messages that slide in, stack, and auto-dismiss.",               tech:["JS","CSS"],     live:"" },
+  { cat:"ui",     name:"Tooltip",                 diff:"beginner",    desc:"Small pop-up labels that appear on hover or focus with auto-repositioning.",         tech:["CSS","JS"],     live:"" },
+  { cat:"ui",     name:"Command Palette",         diff:"advanced",    desc:"Keyboard-triggered search overlay (⌘K) for site-wide navigation and actions.",       tech:["JS","CSS"],     live:"" },
+  { cat:"ui",     name:"Custom Cursor",           diff:"intermediate",desc:"Branded cursor that morphs shape or color when hovering over interactive elements.",  tech:["JS","CSS"],     live:"" },
+  { cat:"ui",     name:"Copy to Clipboard",       diff:"beginner",    desc:"Button that copies text to the clipboard and shows confirmation feedback.",          tech:["JS"],           live:"" },
+  { cat:"ui",     name:"Cookie Consent Banner",   diff:"beginner",    desc:"GDPR-aware notice with accept/decline options, stored in localStorage.",             tech:["JS","CSS"],     live:"" },
+
+  // MEDIA
+  { cat:"media",  name:"Lightbox Gallery",        diff:"intermediate",desc:"Click an image to open it full-screen with prev/next navigation and keyboard support.",tech:["JS","CSS"],    live:"" },
+  { cat:"media",  name:"Lazy Loading Images",     diff:"beginner",    desc:"Images load only as they enter the viewport, reducing initial page load time.",      tech:["HTML","JS"],    live:"" },
+  { cat:"media",  name:"Video Embed",             diff:"beginner",    desc:"Responsive YouTube or Vimeo embed with custom play button and thumbnail.",           tech:["HTML","CSS"],   live:"" },
+  { cat:"media",  name:"Logo Marquee",            diff:"beginner",    desc:"Infinite horizontally-scrolling row of brand logos or partner icons.",               tech:["CSS"],          live:"" },
+  { cat:"media",  name:"Before / After Slider",   diff:"intermediate",desc:"Drag a handle to compare two images side by side — great for portfolio work.",       tech:["JS","CSS"],     live:"" },
+  { cat:"media",  name:"Zoom on Hover",           diff:"beginner",    desc:"Image scales smoothly inside its container on hover without overflowing bounds.",    tech:["CSS"],          live:"" },
+
+  // TYPOGRAPHY
+  { cat:"type",   name:"Animated Gradient Text",  diff:"beginner",    desc:"Headline with an animated colour gradient flowing through the letterforms.",         tech:["CSS"],          live:"" },
+  { cat:"type",   name:"Text Scramble Effect",    diff:"intermediate",desc:"Text that rapidly cycles through random characters before resolving to the final word.",tech:["JS"],         live:"" },
+  { cat:"type",   name:"Variable Font Animation", diff:"intermediate",desc:"Font weight or width animates on hover using a CSS variable font axis.",             tech:["CSS"],          live:"" },
+  { cat:"type",   name:"Drop Cap",                diff:"beginner",    desc:"Editorial oversized first letter styled as a design element in body copy.",          tech:["CSS"],          live:"" },
+  { cat:"type",   name:"Pull Quote",              diff:"beginner",    desc:"Highlighted callout quote styled distinctly from body copy for emphasis.",           tech:["HTML","CSS"],   live:"" },
+  { cat:"type",   name:"Kinetic Text",            diff:"advanced",    desc:"Words that move, rotate, or bounce in sync with scroll or mouse position.",          tech:["JS","CSS"],     live:"" },
+
+  // UTILITIES
+  { cat:"util",   name:"Back to Top Button",      diff:"beginner",    desc:"Button that appears after scrolling down and returns to the top with smooth animation.",tech:["JS","CSS"],   live:"" },
+  { cat:"util",   name:"Social Share Buttons",    diff:"beginner",    desc:"Pre-built share links for Twitter/X, LinkedIn, and WhatsApp with share-count badges.", tech:["HTML","JS"],   live:"" },
+  { cat:"util",   name:"Star Rating",             diff:"intermediate",desc:"Interactive five-star rating widget with hover preview and accessible ARIA labels.",  tech:["JS","CSS"],    live:"" },
+  { cat:"util",   name:"Tag Cloud",               diff:"beginner",    desc:"Collection of clickable keyword tags that filter content or link to category pages.",  tech:["HTML","CSS"],  live:"" },
+  { cat:"util",   name:"Custom 404 Page",         diff:"beginner",    desc:"Branded error page with helpful navigation and a clear route back to the homepage.",   tech:["HTML","CSS"],  live:"" },
+  { cat:"util",   name:"Pagination",              diff:"intermediate",desc:"Numbered or prev/next page controls with active state and ellipsis for large ranges.", tech:["JS","CSS"],    live:"" },
+];
+
+// ─── RENDER ───────────────────────────────────────────────────────
+const catLabels = {
+  nav:"Navigation", layout:"Layout", hero:"Hero / Landing",
+  cards:"Cards & Content", forms:"Forms & Input", anim:"Animation",
+  ui:"Interactive UI", media:"Media", type:"Typography", util:"Utilities"
+};
+
+function card(f) {
+  const livePart = f.live
+    ? `<a class="view-link" href="${f.live}" target="_blank" rel="noopener">Live demo ↗</a>`
+    : `<span class="view-link" style="opacity:0.3;cursor:default">—</span>`;
+  return `
+  <div class="feature-card"
+    data-cat="${f.cat}"
+    data-diff="${f.diff}"
+    data-name="${f.name.toLowerCase()}"
+    data-desc="${f.desc.toLowerCase()}"
+    data-tech="${f.tech.join(' ').toLowerCase()}">
+    <div class="card-top">
+      <span class="cat-tag cat-${f.cat}">${catLabels[f.cat]}</span>
+      <span class="diff-badge diff-${f.diff}">${f.diff}</span>
+    </div>
+    <div class="feature-name">${f.name}</div>
+    <div class="feature-desc">${f.desc}</div>
+    <div class="card-footer">
+      <div class="tech-tags">${f.tech.map(t=>`<span class="tech-tag">${t}</span>`).join('')}</div>
+      ${livePart}
+    </div>
+  </div>`;
+}
+
+const grid = document.getElementById('grid');
+grid.innerHTML = features.map(card).join('');
+document.getElementById('total-count').textContent = features.length;
+
+// ─── FILTER STATE ─────────────────────────────────────────────────
+let activeCat  = 'all';
+let activeDiff = 'all';
+let searchQ    = '';
+
+function applyFilters() {
+  const cards = grid.querySelectorAll('.feature-card');
+  let visible = 0;
+  cards.forEach(c => {
+    const matchCat  = activeCat  === 'all' || c.dataset.cat  === activeCat;
+    const matchDiff = activeDiff === 'all' || c.dataset.diff === activeDiff;
+    const matchSearch = !searchQ ||
+      c.dataset.name.includes(searchQ) ||
+      c.dataset.desc.includes(searchQ) ||
+      c.dataset.tech.includes(searchQ);
+    const show = matchCat && matchDiff && matchSearch;
+    c.classList.toggle('hidden', !show);
+    if (show) visible++;
+  });
+  const rc = document.getElementById('result-count');
+  rc.textContent = searchQ || activeCat !== 'all' || activeDiff !== 'all'
+    ? `${visible} result${visible !== 1 ? 's' : ''}` : '';
+  document.getElementById('no-results').style.display = visible ? 'none' : 'block';
+}
+
+// ─── CATEGORY FILTERS ─────────────────────────────────────────────
+document.getElementById('cat-filters').addEventListener('click', e => {
+  const btn = e.target.closest('[data-cat]');
+  if (!btn) return;
+  activeCat = btn.dataset.cat;
+  document.querySelectorAll('[data-cat]').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+});
+
+// ─── DIFFICULTY FILTERS ───────────────────────────────────────────
+document.querySelectorAll('[data-diff]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeDiff = btn.dataset.diff;
+    document.querySelectorAll('[data-diff]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilters();
+  });
+});
+
+// ─── SEARCH ───────────────────────────────────────────────────────
+document.getElementById('search').addEventListener('input', e => {
+  searchQ = e.target.value.toLowerCase().trim();
+  applyFilters();
+});
+
+// ─── BACK TO TOP ──────────────────────────────────────────────────
+const btt = document.getElementById('btt');
+window.addEventListener('scroll', () => {
+  btt.classList.toggle('visible', window.scrollY > 400);
+}, { passive: true });
+btt.addEventListener('click', e => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+</body>
+</html>

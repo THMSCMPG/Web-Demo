@@ -1,0 +1,32 @@
+---
+layout: default
+---
+<article class="page-article">
+  <div class="container">
+    <header class="page-header reveal">
+      <h1 class="page-title">{{ page.title | default: "Work" }}</h1>
+      {% if page.description %}<p class="page-desc">{{ page.description }}</p>{% endif %}
+    </header>
+
+    {% assign projects = site.projects | sort: "date" | reverse %}
+    {% if projects.size > 0 %}
+    <div class="card-grid">
+      {% for project in projects %}
+      <a class="project-card reveal" href="{{ project.url | relative_url }}">
+        <div class="card-img{% unless project.cover %} card-img-empty{% endunless %}"
+          {% if project.cover %}style="background-image:url('{{ project.cover | relative_url }}')"{% endif %}>
+          {% unless project.cover %}<span>No image yet</span>{% endunless %}
+        </div>
+        <div class="card-body">
+          {% if project.tags %}<span class="tag">{{ project.tags | first }}</span>{% endif %}
+          <h2 class="card-title">{{ project.title }}</h2>
+          <p class="card-desc">{{ project.description }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="muted">Projects coming soon.</p>
+    {% endif %}
+  </div>
+</article>

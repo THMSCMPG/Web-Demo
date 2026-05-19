@@ -1,0 +1,66 @@
+# ═══════════════════════════════════════════════════════════════
+#  SITE SETTINGS — the only file you ever need to edit globally
+# ═══════════════════════════════════════════════════════════════
+
+title:       "Your Site Name"
+tagline:     "A short line that says what you do."
+description: "One or two sentences used in search results and social previews."
+
+author:
+  name:      "Your Name"
+  email:     "hello@yoursite.com"
+  twitter:   ""        # handle only (no @). Delete line if unused.
+  linkedin:  ""        # handle only. Delete line if unused.
+  instagram: ""        # handle only. Delete line if unused.
+
+# ─ URLs ──────────────────────────────────────────────────────────
+# User site  (yourusername.github.io)       → baseurl: ""
+# Project site (yourusername.github.io/xyz) → baseurl: "/xyz"
+url:     "https://yourusername.github.io"
+baseurl: ""
+
+# ─ Navigation ────────────────────────────────────────────────────
+# Add, remove, or reorder links here.
+nav_links:
+  - title: About
+    url:   /about/
+  - title: Work
+    url:   /work/
+  - title: Blog
+    url:   /blog/
+
+# ─ Appearance ────────────────────────────────────────────────────
+# Starting theme before the user picks one. "light" or "dark"
+default_theme: "light"
+# Brand accent colour — change this hex to match your palette
+accent_color:  "#2d6a4f"
+
+# ═══════════════════════════════════════════════════════════════
+#  TECHNICAL — do not edit below this line
+# ═══════════════════════════════════════════════════════════════
+permalink:   /blog/:year/:month/:day/:title/
+timezone:    America/Chicago
+markdown:    kramdown
+highlighter: rouge
+
+kramdown:
+  input:         GFM
+  syntax_highlighter: rouge
+
+collections:
+  projects:
+    output:    true
+    permalink: /work/:name/
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+  - scope: { path: "", type: projects }
+    values: { layout: project }
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - .gitignore

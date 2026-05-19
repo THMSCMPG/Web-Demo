@@ -1,0 +1,62 @@
+---
+layout: default
+---
+
+<div class="reading-progress" id="reading-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+<article class="post-article">
+  <div class="container container-narrow">
+
+    <header class="post-header">
+      {% if page.tags %}
+      <div class="post-tags reveal">
+        {% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+      </div>
+      {% endif %}
+      <h1 class="post-title reveal">{{ page.title }}</h1>
+      <div class="post-meta reveal">
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+        <span class="reading-time" id="reading-time"></span>
+      </div>
+    </header>
+
+    {% if page.cover %}
+    <div class="post-cover reveal">
+      <img src="{{ page.cover | relative_url }}" alt="{{ page.title }}" loading="eager" />
+    </div>
+    {% endif %}
+
+    <div class="prose reveal" id="post-content">
+      {{ content }}
+    </div>
+
+    <footer class="post-footer">
+
+      <div class="share-block reveal">
+        <span class="share-label">Share</span>
+        <a class="share-btn"
+           href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ site.url }}{{ page.url }}"
+           target="_blank" rel="noopener">Twitter / X</a>
+        <a class="share-btn"
+           href="https://www.linkedin.com/sharing/share-offsite/?url={{ site.url }}{{ page.url }}"
+           target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+
+      <nav class="post-nav reveal" aria-label="Post navigation">
+        {% if page.previous.url %}
+        <a class="post-nav-item" href="{{ page.previous.url | relative_url }}">
+          <span class="post-nav-dir">&larr; Previous</span>
+          <span class="post-nav-title">{{ page.previous.title }}</span>
+        </a>
+        {% else %}<div></div>{% endif %}
+        {% if page.next.url %}
+        <a class="post-nav-item post-nav-right" href="{{ page.next.url | relative_url }}">
+          <span class="post-nav-dir">Next &rarr;</span>
+          <span class="post-nav-title">{{ page.next.title }}</span>
+        </a>
+        {% endif %}
+      </nav>
+
+    </footer>
+  </div>
+</article>

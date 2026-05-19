@@ -1,0 +1,56 @@
+---
+layout: default
+---
+<article class="project-article">
+
+  {% if page.cover %}
+  <div class="project-hero" style="background-image:url('{{ page.cover | relative_url }}')">
+    <div class="project-hero-overlay"></div>
+    <div class="container">
+      <h1 class="project-hero-title reveal">{{ page.title }}</h1>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="container container-narrow">
+
+    {% unless page.cover %}
+    <h1 class="page-title reveal">{{ page.title }}</h1>
+    {% endunless %}
+
+    <div class="project-meta reveal">
+      {% if page.client %}
+      <div class="meta-row"><span class="meta-key">Client</span><span class="meta-val">{{ page.client }}</span></div>
+      {% endif %}
+      {% if page.year %}
+      <div class="meta-row"><span class="meta-key">Year</span><span class="meta-val">{{ page.year }}</span></div>
+      {% endif %}
+      {% if page.role %}
+      <div class="meta-row"><span class="meta-key">Role</span><span class="meta-val">{{ page.role }}</span></div>
+      {% endif %}
+      {% if page.tags %}
+      <div class="meta-row"><span class="meta-key">Type</span><span class="meta-val">{{ page.tags | join: ", " }}</span></div>
+      {% endif %}
+      {% if page.url_live %}
+      <div class="meta-row"><span class="meta-key">Live site</span><a class="meta-link" href="{{ page.url_live }}" target="_blank" rel="noopener">Visit &rarr;</a></div>
+      {% endif %}
+    </div>
+
+    <div class="prose reveal">
+      {{ content }}
+    </div>
+
+    {% if page.images %}
+    <div class="project-gallery">
+      {% for img in page.images %}
+      <img class="gallery-img reveal" src="{{ img | relative_url }}" alt="{{ page.title }}" loading="lazy" />
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="project-back reveal">
+      <a class="btn btn-outline" href="{{ '/work/' | relative_url }}">&larr; All projects</a>
+    </div>
+
+  </div>
+</article>
