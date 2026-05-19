@@ -1,6 +1,7 @@
 ---
 layout: home
-title: Home
+title: Example Home
+permalink: /example-home/
 hero_title: "Your Name"
 hero_sub: "I build fast, beautiful websites for small businesses and makers."
 eyebrow: "Hello, I'm"

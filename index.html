@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Feature Catalog — Web Design by THMSCMPG</title>
+<title>Feature Catalog — THMSCMPG Web Design</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -395,6 +395,56 @@
   #btt.visible { opacity: 1; pointer-events: all; }
   #btt:hover { color: var(--text); }
 
+  /* ─── HOW IT WORKS BAR ───────────────────────── */
+  .how-it-works {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 28px 0 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .how-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    flex: 1;
+    min-width: 200px;
+  }
+  .how-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    color: var(--accent);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .how-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    padding-top: 4px;
+  }
+  .how-text strong { color: var(--text); font-weight: 500; }
+  .how-text code {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    background: var(--bg3);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--accent);
+  }
+  .how-divider {
+    font-size: 18px;
+    color: var(--subtle);
+    flex-shrink: 0;
+    align-self: center;
+  }
+  @media (max-width: 700px) {
+    .how-divider { display: none; }
+    .how-it-works { gap: 20px; }
+  }
+
   /* ─── SCROLLBAR ──────────────────────────────── */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
@@ -413,11 +463,12 @@
 <!-- HEADER -->
 <header>
   <div class="container header-inner">
-    <a class="logo" href="#">Feature<span>.</span>Catalog</a>
+    <a class="logo" href="#">THMS<span>.</span>CMPG</a>
     <div class="header-right">
-      <a class="site-link" href="https://your-site.com" target="_blank" rel="noopener">
-        See it live <span class="arr">↗</span>
-      </a>
+      <a class="site-link" href="/example-home/">Example Home</a>
+      <a class="site-link" href="/work/">Work</a>
+      <a class="site-link" href="/about/">About</a>
+      <a class="site-link" href="/blog/">Blog</a>
     </div>
   </div>
 </header>
@@ -425,11 +476,12 @@
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <p class="hero-eyebrow">// Web Design Feature Catalog</p>
+    <p class="hero-eyebrow">// Step 1: Browse &amp; Pick — Step 2: See the examples — Step 3: I build it for you</p>
     <h1 class="hero-title">WHAT<br/><span class="dim">I BUILD</span></h1>
     <p class="hero-desc">
-      A <strong>complete menu</strong> of web design features and components I implement.
-      Browse, filter by category, then see any of them working live on my website.
+      This is your <strong>feature menu</strong>. Browse every component and capability I offer,
+      filter by category, then click through the example pages above to see finished sites built from these same pieces.
+      When you're ready, just tell me what you want.
     </p>
     <div class="hero-stats">
       <div class="stat-item">
@@ -450,6 +502,25 @@
 
 <!-- CONTROLS -->
 <div class="container">
+
+  <!-- HOW IT WORKS -->
+  <div class="how-it-works">
+    <div class="how-step">
+      <span class="how-num">01</span>
+      <span class="how-text"><strong>Browse the catalog</strong> — filter by category or search to find features that fit your vision.</span>
+    </div>
+    <div class="how-divider">→</div>
+    <div class="how-step">
+      <span class="how-num">02</span>
+      <span class="how-text"><strong>See finished examples</strong> — click the nav links above to browse a real example site built from these features.</span>
+    </div>
+    <div class="how-divider">→</div>
+    <div class="how-step">
+      <span class="how-num">03</span>
+      <span class="how-text"><strong>Tell me what you want</strong> — I build it. You drop in your <code>.md</code> files and images and it's done.</span>
+    </div>
+  </div>
+
   <div class="controls">
     <div class="search-row">
       <div class="search-wrap">
@@ -492,10 +563,10 @@
 <!-- FOOTER -->
 <footer class="container">
   <span class="footer-text">
-    Built with HTML · CSS · JS — deployable on <a href="https://pages.github.com" target="_blank">GitHub Pages</a>
+    THMS.CMPG Web Design — deployable on <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a>
   </span>
   <span class="footer-text">
-    <a href="https://your-site.com" target="_blank">your-site.com ↗</a>
+    <a href="/example-home/">Example site ↗</a>
   </span>
 </footer>
 
