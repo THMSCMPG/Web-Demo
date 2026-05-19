@@ -22,6 +22,10 @@ baseurl: ""
 # ─ Navigation ────────────────────────────────────────────────────
 # Add, remove, or reorder links here.
 nav_links:
+  - title: "← Catalog"
+    url:   /
+  - title: Home
+    url:   /example-home/
   - title: About
     url:   /about/
   - title: Work
